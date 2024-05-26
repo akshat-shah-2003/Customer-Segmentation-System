@@ -26,10 +26,9 @@ def execute_query(query, params=None):
         else:
             cursor.execute(query)
 
+        result = None
         if cursor.description:
             result = cursor.fetchall()
-        else:
-            result = None
 
         conn.commit()  # Commit the transaction for INSERT, UPDATE, DELETE statements
 
@@ -43,6 +42,7 @@ def execute_query(query, params=None):
     except Exception as e:
         logging.error(f"Error executing SQL query: {e}")
         return None
+
 
 @app.route('/')
 def index():
