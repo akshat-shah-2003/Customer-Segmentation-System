@@ -1,0 +1,9 @@
+dash
+dash-core-components
+dash-html-components
+dash-bootstrap-components
+pandas
+numpy
+scikit-learn
+mysql-connector-python
+plotly

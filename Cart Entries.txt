@@ -1,0 +1,34 @@
+
+CREATE SEQUENCE cart_id_seq START WITH 1 INCREMENT BY 1;
+
+
+
+CREATE TABLE cart (
+    cart_id NUMBER PRIMARY KEY,
+    user_id NUMBER,
+    product_id NUMBER,
+    added_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    add_to_cart_count NUMBER,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+
+
+
+
+CREATE OR REPLACE TRIGGER cart_id_trigger
+BEFORE INSERT ON cart
+FOR EACH ROW
+BEGIN
+    SELECT cart_id_seq.NEXTVAL INTO :new.cart_id FROM dual;
+END;
+/
+
+
+
+////NEWWW-->JUST FOR VIEWING
+SELECT cart_id, user_id, product_id, TO_CHAR(added_on, 'DD-MON-YYYY HH24:MI:SS') AS added_on,
+       add_to_cart_count
+FROM cart;
+
+

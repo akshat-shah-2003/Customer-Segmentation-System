@@ -1,0 +1,264 @@
+#TRIGGER CREATED FOR AUTOMATIC ID CREATION  (REMOVED)
+CREATE OR REPLACE TRIGGER users_trigger
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    SELECT user_id_seq.NEXTVAL INTO :NEW.user_id FROM dual;
+END;
+/
+
+NWE SEQUNCE --> ALTER SEQUENCE user_id_seq RESTART WITH 201;
+
+
+
+DROP SEQUENCE user_id_seq;
+CREATE SEQUENCE user_id_seq
+START WITH 201
+INCREMENT BY 1;
+
+
+CREATE OR REPLACE TRIGGER users_trigger
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    :NEW.user_id := user_id_seq.NEXTVAL;
+END;
+/
+
+
+COLUMN user_id FORMAT 999999
+COLUMN name FORMAT A20
+COLUMN email FORMAT A30
+COLUMN gender FORMAT A10
+COLUMN age FORMAT 999
+COLUMN city FORMAT A20
+COLUMN mobile_no FORMAT A15
+
+
+
+
+
+
+
+CREATE TABLE users (
+    user_id NUMBER,
+    name VARCHAR2(100),
+    email VARCHAR2(100),
+    gender VARCHAR2(10),
+    age NUMBER,
+    city VARCHAR2(100),
+    mobile_no VARCHAR2(15),
+    PRIMARY KEY (user_id)
+);
+
+User Entries -->
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (1, 'Anurag Chorghade', 'chorghadeanurag@gmail.com', 'Male', 21, 'Nagpur', '8767813612');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (2, 'Aarav Gupta', 'guptaarav@gmail.com', 'Male', 19, 'Delhi', '9876543210');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (3, 'Isha Singh', 'singhisha@gmail.com', 'Female', 20, 'Mumbai', '8765432109');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (4, 'Aditi Sharma', 'sharmaaditi@gmail.com', 'Female', 22, 'Bangalore', '7654321098');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (5, 'Raj Patel', 'patelraj@gmail.com', 'Male', 18, 'Ahmedabad', '6543210987');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (6, 'Neha Reddy', 'reddyneha@gmail.com', 'Female', 23, 'Hyderabad', '5432109876');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (7, 'Arjun Kumar', 'kumararjun@gmail.com', 'Male', 21, 'Chennai', '4321098765');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (8, 'Aisha Khan', 'khanaisha@gmail.com', 'Female', 19, 'Kolkata', '3210987654');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (9, 'Vivek Pandey', 'pandeyvivek@gmail.com', 'Male', 24, 'Lucknow', '2109876543');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (10, 'Meera Gupta', 'guptameera@gmail.com', 'Female', 20, 'Jaipur', '1098765432');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (11, 'Abhishek Singh', 'singhabhishek@gmail.com', 'Male', 18, 'Pune', '9876655443');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (12, 'Aaradhya Reddy', 'reddyaaradhya@gmail.com', 'Female', 19, 'Nagpur', '8877665544');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (13, 'Rishi Patel', 'patelrishi@gmail.com', 'Male', 21, 'Delhi', '7788554433');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (14, 'Sneha Gupta', 'guptasneha@gmail.com', 'Female', 20, 'Mumbai', '6688443322');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (15, 'Kabir Kumar', 'kumarkabir@gmail.com', 'Male', 24, 'Bangalore', '5577332211');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (16, 'Ananya Sharma', 'sharmaananya@gmail.com', 'Female', 22, 'Ahmedabad', '4466221100');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (17, 'Surya Singh', 'singhsurya@gmail.com', 'Male', 19, 'Hyderabad', '3355110099');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (18, 'Ishita Reddy', 'reddyishita@gmail.com', 'Female', 20, 'Chennai', '2244009988');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (19, 'Vikram Kumar', 'kumarvikram@gmail.com', 'Male', 21, 'Kolkata', '1133998877');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (20, 'Riya Pandey', 'pandeyriya@gmail.com', 'Female', 23, 'Lucknow', '0022887766');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (21, 'Aryan Gupta', 'guptaaryan@gmail.com', 'Male', 22, 'Jaipur', '9911665522');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (22, 'Manya Singh', 'singhmanya@gmail.com', 'Female', 19, 'Pune', '9922336611');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (23, 'Rohan Reddy', 'reddyrohan@gmail.com', 'Male', 20, 'Nagpur', '8833224477');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (24, 'Ishaan Patel', 'patelishaan@gmail.com', 'Male', 18, 'Delhi', '7744113366');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (25, 'Simran Gupta', 'guptasimran@gmail.com', 'Female', 19, 'Mumbai', '6655222244');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (26, 'Amit Sharma', 'sharmaamit@gmail.com', 'Male', 21, 'Bangalore', '5566333311');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (27, 'Priya Singh', 'singhpriya@gmail.com', 'Female', 20, 'Ahmedabad', '4477553322');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (28, 'Rahul Kumar', 'kumarrahul@gmail.com', 'Male', 19, 'Hyderabad', '3388664411');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (29, 'Anjali Reddy', 'reddyanjali@gmail.com', 'Female', 18, 'Chennai', '2299775500');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (30, 'Alok Kumar', 'kumaralok@gmail.com', 'Male', 20, 'Kolkata', '1100886611');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (31, 'Sanvi Pandey', 'pandeysanvi@gmail.com', 'Female', 21, 'Lucknow', '0011227700');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (32, 'Aarav Gupta', 'guptaarav@gmail.com', 'Male', 22, 'Jaipur', '9999887766');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (33, 'Ishika Singh', 'singhishika@gmail.com', 'Female', 19, 'Pune', '9988776655');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (34, 'Yash Reddy', 'reddyyash@gmail.com', 'Male', 20, 'Nagpur', '8822334466');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (35, 'Sanya Patel', 'patelsanya@gmail.com', 'Female', 23, 'Delhi', '7711223344');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (36, 'Rajesh Gupta', 'guptarajesh@gmail.com', 'Male', 24, 'Mumbai', '6622114455');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (37, 'Shreya Sharma', 'sharmashreya@gmail.com', 'Female', 18, 'Bangalore', '5533446611');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (38, 'Pranav Singh', 'singhpranav@gmail.com', 'Male', 19, 'Ahmedabad', '3344557722');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (39, 'Diya Kumar', 'kumardiya@gmail.com', 'Female', 20, 'Hyderabad', '2255668833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (40, 'Aarush Reddy', 'reddyaarush@gmail.com', 'Male', 21, 'Chennai', '1166779922');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (41, 'Ishani Gupta', 'guptaishani@gmail.com', 'Female', 22, 'Kolkata', '9911882266');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (42, 'Rishi Pandey', 'pandeyrishi@gmail.com', 'Male', 18, 'Lucknow', '8822661199');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (43, 'Ananya Singh', 'singhananya@gmail.com', 'Female', 19, 'Jaipur', '7711998822');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (44, 'Aryan Reddy', 'reddyaryan@gmail.com', 'Male', 20, 'Pune', '6622119933');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (45, 'Nidhi Patel', 'patelnidhi@gmail.com', 'Female', 21, 'Nagpur', '5533221199');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (46, 'Karan Gupta', 'guptakaran@gmail.com', 'Male', 22, 'Delhi', '4411998833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (47, 'Shivangi Singh', 'singhshivangi@gmail.com', 'Female', 19, 'Mumbai', '3322119944');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (48, 'Rahul Sharma', 'sharmarahul@gmail.com', 'Male', 20, 'Bangalore', '2211998833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (49, 'Anjali Kumar', 'kumaranjali@gmail.com', 'Female', 21, 'Ahmedabad', '1122339944');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (50, 'Rohit Reddy', 'reddyrohit@gmail.com', 'Male', 18, 'Hyderabad', '9933221144');
+
+
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (51, 'Amitabh Khanna', 'khannaamitabh@gmail.com', 'Male', 30, 'Delhi', '9876543210');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (52, 'Sunita Rao', 'raosunita@gmail.com', 'Female', 35, 'Mumbai', '8765432109');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (53, 'Rajesh Menon', 'menonrajesh@gmail.com', 'Male', 28, 'Bangalore', '7654321098');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (54, 'Deepika Iyer', 'iyerdeepika@gmail.com', 'Female', 32, 'Chennai', '6543210987');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (55, 'Ravi Verma', 'vermaravi@gmail.com', 'Male', 26, 'Hyderabad', '5432109876');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (56, 'Reena Kapoor', 'kapoorreena@gmail.com', 'Female', 34, 'Kolkata', '4321098765');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (57, 'Ajay Rathore', 'rathoreajay@gmail.com', 'Male', 37, 'Lucknow', '3210987654');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (58, 'Sneha Desai', 'desaisneha@gmail.com', 'Female', 29, 'Jaipur', '2109876543');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (59, 'Vikrant Singhania', 'singhaniavikrant@gmail.com', 'Male', 36, 'Pune', '1098765432');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (60, 'Kritika Reddy', 'reddykritika@gmail.com', 'Female', 27, 'Nagpur', '9988776655');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (61, 'Abhinav Sharma', 'sharmaabhinav@gmail.com', 'Male', 29, 'Delhi', '8877665544');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (62, 'Neha Sinha', 'sinhaneha@gmail.com', 'Female', 33, 'Mumbai', '7788554433');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (63, 'Ankit Patel', 'patelankit@gmail.com', 'Male', 31, 'Bangalore', '6688443322');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (64, 'Priya Agarwal', 'agarwalpriya@gmail.com', 'Female', 25, 'Chennai', '5577332211');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (65, 'Rahul Mishra', 'mishra.rahul@gmail.com', 'Male', 28, 'Hyderabad', '4466221100');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (66, 'Shikha Khurana', 'khuranashikha@gmail.com', 'Female', 30, 'Kolkata', '3355110099');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (67, 'Alok Verma', 'verma.alok@gmail.com', 'Male', 36, 'Lucknow', '2244009988');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (68, 'Manisha Gupta', 'guptamanisha@gmail.com', 'Female', 32, 'Jaipur', '1133998877');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (69, 'Rohit Singh', 'singhrohit@gmail.com', 'Male', 35, 'Pune', '0022887766');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (70, 'Tanvi Reddy', 'reddytanvi@gmail.com', 'Female', 26, 'Nagpur', '9911665522');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (71, 'Karan Kapoor', 'kapoorkaran@gmail.com', 'Male', 29, 'Delhi', '9922336611');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (72, 'Smita Joshi', 'joshismita@gmail.com', 'Female', 33, 'Mumbai', '8833224477');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (73, 'Harish Gupta', 'guptaharish@gmail.com', 'Male', 30, 'Bangalore', '7744113366');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (74, 'Nisha Patel', 'patelnisha@gmail.com', 'Female', 27, 'Chennai', '6655222244');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (75, 'Vijay Sharma', 'sharmavijay@gmail.com', 'Male', 28, 'Hyderabad', '5566333311');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (76, 'Shweta Singh', 'singhshweta@gmail.com', 'Female', 36, 'Kolkata', '4477553322');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (77, 'Rakesh Gupta', 'guptarakesh@gmail.com', 'Male', 32, 'Lucknow', '3388664411');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (78, 'Jaya Verma', 'vermajaya@gmail.com', 'Female', 25, 'Jaipur', '2299775500');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (79, 'Rajeshwari Reddy', 'reddyrajeshwari@gmail.com', 'Male', 26, 'Pune', '1100886611');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (80, 'Prateek Khanna', 'khannaprateek@gmail.com', 'Male', 37, 'Nagpur', '0011227700');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (81, 'Swati Sharma', 'sharmaswati@gmail.com', 'Female', 30, 'Delhi', '9999887766');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (82, 'Vinay Kumar', 'kumarvinay@gmail.com', 'Male', 35, 'Mumbai', '9988776655');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (83, 'Anushka Singh', 'singhanushka@gmail.com', 'Female', 29, 'Bangalore', '8822334466');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (84, 'Gopal Verma', 'vermagopal@gmail.com', 'Male', 31, 'Chennai', '7711223344');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (85, 'Shivani Gupta', 'guptashivani@gmail.com', 'Female', 28, 'Hyderabad', '6622114455');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (86, 'Aryan Kumar', 'kumararyan@gmail.com', 'Male', 33, 'Kolkata', '5533446611');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (87, 'Kavya Patel', 'patelkavya@gmail.com', 'Female', 26, 'Lucknow', '3344557722');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (88, 'Siddharth Sharma', 'sharmasiddharth@gmail.com', 'Male', 27, 'Jaipur', '2255668833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (89, 'Pooja Reddy', 'reddypooja@gmail.com', 'Female', 36, 'Pune', '1166779922');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (90, 'Rajat Gupta', 'guptarajat@gmail.com', 'Male', 30, 'Nagpur', '9999887766');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (91, 'Neha Singh', 'singhneha@gmail.com', 'Female', 31, 'Delhi', '8822661199');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (92, 'Vikas Sharma', 'sharmavikas@gmail.com', 'Male', 29, 'Mumbai', '7711998822');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (93, 'Jyoti Patel', 'pateljyoti@gmail.com', 'Female', 25, 'Bangalore', '6622119933');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (94, 'Rahul Khanna', 'khannarahul@gmail.com', 'Male', 26, 'Chennai', '5533221199');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (95, 'Shreya Singh', 'singhshreya@gmail.com', 'Female', 35, 'Hyderabad', '4411998833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (96, 'Karan Kumar', 'kumarkaran@gmail.com', 'Male', 32, 'Kolkata', '3322119944');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (97, 'Anjali Sharma', 'sharmaanjali@gmail.com', 'Female', 28, 'Lucknow', '2211998833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (98, 'Rajesh Patel', 'patelrajesh@gmail.com', 'Male', 29, 'Jaipur', '1122339944');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (99, 'Ananya Reddy', 'reddyananya@gmail.com', 'Female', 37, 'Pune', '9933221144');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (100, 'Amit Kumar', 'kumaramit@gmail.com', 'Male', 30, 'Nagpur', '8822113344');
+
+
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (101, 'Vijay Kumar', 'kumarvijay@gmail.com', 'Male', 42, 'Delhi', '9876543210');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (102, 'Ritu Sharma', 'sharmaritu@gmail.com', 'Female', 45, 'Mumbai', '8765432109');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (103, 'Rajiv Singh', 'singhrajiv@gmail.com', 'Male', 51, 'Bangalore', '7654321098');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (104, 'Meenakshi Nair', 'nairmeenakshi@gmail.com', 'Female', 47, 'Chennai', '6543210987');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (105, 'Prakash Reddy', 'reddyprakash@gmail.com', 'Male', 52, 'Hyderabad', '5432109876');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (106, 'Madhu Menon', 'menonmadhu@gmail.com', 'Female', 48, 'Kolkata', '4321098765');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (107, 'Alok Desai', 'desaialok@gmail.com', 'Male', 49, 'Lucknow', '3210987654');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (108, 'Rashmi Joshi', 'joshirashmi@gmail.com', 'Female', 43, 'Jaipur', '2109876543');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (109, 'Sanjay Gupta', 'guptasanjay@gmail.com', 'Male', 46, 'Pune', '1098765432');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (110, 'Deepa Reddy', 'reddydeepa@gmail.com', 'Female', 44, 'Nagpur', '9988776655');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (111, 'Ramesh Khanna', 'khannaramesh@gmail.com', 'Male', 55, 'Delhi', '8877665544');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (112, 'Anita Singh', 'singhanita@gmail.com', 'Female', 52, 'Mumbai', '7788554433');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (113, 'Vikram Patel', 'patelvikram@gmail.com', 'Male', 50, 'Bangalore', '6688443322');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (114, 'Priya Mehta', 'mehtapriya@gmail.com', 'Female', 41, 'Chennai', '5577332211');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (115, 'Alok Sinha', 'sinhaalok@gmail.com', 'Male', 44, 'Hyderabad', '4466221100');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (116, 'Manisha Kapoor', 'kapoormanisha@gmail.com', 'Female', 53, 'Kolkata', '3355110099');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (117, 'Ajay Singhania', 'singhaniaajay@gmail.com', 'Male', 49, 'Lucknow', '2244009988');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (118, 'Sangeeta Gupta', 'guptasangeeta@gmail.com', 'Female', 47, 'Jaipur', '1133998877');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (119, 'Rahul Reddy', 'reddyrahul@gmail.com', 'Male', 42, 'Pune', '0022887766');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (120, 'Priyanka Kumar', 'kumarpriyanka@gmail.com', 'Female', 45, 'Nagpur', '9911665522');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (121, 'Anand Sharma', 'sharmaanand@gmail.com', 'Male', 53, 'Delhi', '9922336611');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (122, 'Seema Deshmukh', 'deshmukhseema@gmail.com', 'Female', 49, 'Mumbai', '8833224477');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (123, 'Rajiv Malhotra', 'malhotrarajiv@gmail.com', 'Male', 47, 'Bangalore', '7744113366');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (124, 'Indira Rao', 'raoindira@gmail.com', 'Female', 41, 'Chennai', '6655222244');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (125, 'Arun Varma', 'varmaarun@gmail.com', 'Male', 43, 'Hyderabad', '5566333311');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (126, 'Shobha Menon', 'menonshobha@gmail.com', 'Female', 51, 'Kolkata', '4477553322');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (127, 'Sanjay Shah', 'shahsanjay@gmail.com', 'Male', 50, 'Lucknow', '3388664411');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (128, 'Anita Verma', 'vermaanita@gmail.com', 'Female', 45, 'Jaipur', '2299775500');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (129, 'Rajat Gupta', 'guptarajat@gmail.com', 'Male', 48, 'Pune', '1100886611');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (130, 'Kavita Reddy', 'reddykavita@gmail.com', 'Female', 44, 'Nagpur', '0011227700');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (131, 'Anil Kumar', 'kumaranil@gmail.com', 'Male', 55, 'Delhi', '9999887766');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (132, 'Rashmi Singh', 'singhrashmi@gmail.com', 'Female', 52, 'Mumbai', '9988776655');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (133, 'Vijay Patel', 'patelvijay@gmail.com', 'Male', 50, 'Bangalore', '8822334466');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (134, 'Shilpa Agarwal', 'agarwalshilpa@gmail.com', 'Female', 41, 'Chennai', '7711223344');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (135, 'Amit Sharma', 'sharmaamit@gmail.com', 'Male', 44, 'Hyderabad', '6622114455');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (136, 'Nisha Kapoor', 'kapoornisha@gmail.com', 'Female', 53, 'Kolkata', '5533446611');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (137, 'Alok Singhania', 'singhalok@gmail.com', 'Male', 49, 'Lucknow', '3344557722');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (138, 'Neeta Gupta', 'guptaneeta@gmail.com', 'Female', 47, 'Jaipur', '2255668833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (139, 'Rahul Reddy', 'reddyrahul@gmail.com', 'Male', 42, 'Pune', '1166779922');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (140, 'Priya Kumar', 'kumarpriya@gmail.com', 'Female', 45, 'Nagpur', '9999887766');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (141, 'Anand Sharma', 'sharmaanand@gmail.com', 'Male', 53, 'Delhi', '8822661199');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (142, 'Seema Deshmukh', 'deshmukhseema@gmail.com', 'Female', 49, 'Mumbai', '7711998822');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (143, 'Rajiv Malhotra', 'malhotrarajiv@gmail.com', 'Male', 47, 'Bangalore', '6622119933');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (144, 'Indira Rao', 'raoindira@gmail.com', 'Female', 41, 'Chennai', '5533221199');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (145, 'Arun Varma', 'varmaarun@gmail.com', 'Male', 43, 'Hyderabad', '4411998833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (146, 'Shobha Menon', 'menonshobha@gmail.com', 'Female', 51, 'Kolkata', '3322119944');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (147, 'Sanjay Shah', 'shahsanjay@gmail.com', 'Male', 50, 'Lucknow', '2211998833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (148, 'Anita Verma', 'vermaanita@gmail.com', 'Female', 45, 'Jaipur', '1122339944');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (149, 'Rajat Gupta', 'guptarajat@gmail.com', 'Male', 48, 'Pune', '9933221144');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (150, 'Kavita Reddy', 'reddykavita@gmail.com', 'Female', 44, 'Nagpur', '8822113344');
+
+
+
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (151, 'Arnav Deshpande', 'deshpandearnav@gmail.com', 'Male', 15, 'Nashik', '9876543210');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (152, 'Jiya Mehta', 'mehtajiya@gmail.com', 'Female', 18, 'Udaipur', '8765432109');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (153, 'Vikram Prasad', 'prasadvikram@gmail.com', 'Male', 22, 'Amritsar', '7654321098');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (154, 'Amrita Iyer', 'iyeramrita@gmail.com', 'Female', 25, 'Surat', '6543210987');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (155, 'Aditya Singh', 'singhaditya@gmail.com', 'Male', 32, 'Indore', '5432109876');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (156, 'Priya Sharma', 'sharmapriya@gmail.com', 'Female', 28, 'Agra', '4321098765');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (157, 'Raj Patel', 'patelraj@gmail.com', 'Male', 35, 'Bhopal', '3210987654');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (158, 'Neha Singh', 'singhneha@gmail.com', 'Female', 40, 'Visakhapatnam', '2109876543');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (159, 'Karan Gupta', 'guptakaran@gmail.com', 'Male', 45, 'Thane', '1098765432');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (160, 'Isha Khanna', 'khannai@gmail.com', 'Female', 50, 'Patna', '9988776655');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (161, 'Aryan Kapoor', 'kapooraryan@gmail.com', 'Male', 55, 'Guwahati', '8822334466');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (162, 'Pooja Reddy', 'reddypooja@gmail.com', 'Female', 60, 'Shillong', '7711223344');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (163, 'Rajat Kumar', 'kumarrajat@gmail.com', 'Male', 20, 'Gangtok', '6622114455');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (164, 'Nisha Joshi', 'joshinisha@gmail.com', 'Female', 24, 'Kochi', '5533446611');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (165, 'Kartik Gupta', 'guptakartik@gmail.com', 'Male', 28, 'Coimbatore', '3344557722');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (166, 'Sneha Patel', 'patelsneha@gmail.com', 'Female', 30, 'Shimla', '2255668833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (167, 'Alok Reddy', 'reddyalok@gmail.com', 'Male', 35, 'Port Blair', '1166779922');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (168, 'Shreya Sharma', 'sharmashreya@gmail.com', 'Female', 38, 'Itanagar', '9999887766');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (169, 'Rahul Verma', 'vermarahul@gmail.com', 'Male', 42, 'Agartala', '9988776655');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (170, 'Anjali Singh', 'singhanjali@gmail.com', 'Female', 47, 'Gangtok', '8822661199');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (171, 'Vivek Shah', 'shahvivek@gmail.com', 'Male', 52, 'Kochi', '7711998822');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (172, 'Riya Sinha', 'sinhariya@gmail.com', 'Female', 48, 'Coimbatore', '6622119933');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (173, 'Ashok Reddy', 'reddyashok@gmail.com', 'Male', 55, 'Shimla', '5533221199');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (174, 'Nandini Sharma', 'sharmanandini@gmail.com', 'Female', 53, 'Port Blair', '4411998833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (175, 'Rahul Verma', 'vermarahul@gmail.com', 'Male', 42, 'Itanagar', '3322119944');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (176, 'Sneha Patel', 'patelsneha@gmail.com', 'Female', 30, 'Agartala', '2211998833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (177, 'Alok Reddy', 'reddyalok@gmail.com', 'Male', 35, 'Gangtok', '1122339944');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (178, 'Shreya Sharma', 'sharmashreya@gmail.com', 'Female', 38, 'Kochi', '9933221144');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (179, 'Rahul Verma', 'vermarahul@gmail.com', 'Male', 42, 'Coimbatore', '8822113344');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (180, 'Sneha Patel', 'patelsneha@gmail.com', 'Female', 30, 'Shimla', '7711223344');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (181, 'Alok Reddy', 'reddyalok@gmail.com', 'Male', 35, 'Port Blair', '6622114455');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (182, 'Shreya Sharma', 'sharmashreya@gmail.com', 'Female', 38, 'Itanagar', '5533446611');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (183, 'Rahul Verma', 'vermarahul@gmail.com', 'Male', 42, 'Agartala', '3344557722');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (184, 'Sneha Patel', 'patelsneha@gmail.com', 'Female', 30, 'Gangtok', '2255668833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (185, 'Alok Reddy', 'reddyalok@gmail.com', 'Male', 35, 'Kochi', '1166779922');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (186, 'Shreya Sharma', 'sharmashreya@gmail.com', 'Female', 38, 'Coimbatore', '9999887766');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (187, 'Rahul Verma', 'vermarahul@gmail.com', 'Male', 42, 'Shimla', '9988776655');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (188, 'Sneha Patel', 'patelsneha@gmail.com', 'Female', 30, 'Port Blair', '8822661199');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (189, 'Alok Reddy', 'reddyalok@gmail.com', 'Male', 35, 'Kochi', '7711998822');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (190, 'Shreya Sharma', 'sharmashreya@gmail.com', 'Female', 38, 'Shimla', '6622119933');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (191, 'Rahul Verma', 'vermarahul@gmail.com', 'Male', 42, 'Port Blair', '5533221199');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (192, 'Sneha Patel', 'patelsneha@gmail.com', 'Female', 30, 'Itanagar', '4411998833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (193, 'Alok Reddy', 'reddyalok@gmail.com', 'Male', 35, 'Agartala', '3322119944');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (194, 'Shreya Sharma', 'sharmashreya@gmail.com', 'Female', 38, 'Shimla', '2211998833');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (195, 'Rahul Verma', 'vermarahul@gmail.com', 'Male', 42, 'Itanagar', '1122339944');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (196, 'Sneha Patel', 'patelsneha@gmail.com', 'Female', 30, 'Agartala', '9933221144');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (197, 'Alok Reddy', 'reddyalok@gmail.com', 'Male', 35, 'Shimla', '8822113344');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (198, 'Shreya Sharma', 'sharmashreya@gmail.com', 'Female', 38, 'Port Blair', '7711223344');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (199, 'Rahul Verma', 'vermarahul@gmail.com', 'Male', 42, 'Kochi', '6622114455');
+INSERT INTO users (user_id, name, email, gender, age, city, mobile_no) VALUES (200, 'Sneha Patel', 'patelsneha@gmail.com', 'Female', 30, 'Coimbatore', '5533446611');
+
+
+

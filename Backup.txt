@@ -1,0 +1,178 @@
+
+import cx_Oracle
+from flask import Flask, render_template, request, redirect, url_for
+
+app = Flask(__name__)
+
+# Database connection details
+username = "anurag"
+password = "anurag30"
+dsn = "localhost:1521/orcl"
+
+# Function to execute SQL queries
+def execute_query(query, params=None):
+    try:
+        connection = cx_Oracle.connect(username, password, dsn)
+        cursor = connection.cursor()
+
+        if params:
+            cursor.execute(query, params)
+        else:
+            cursor.execute(query)
+
+        if cursor.description:
+            result = cursor.fetchall()
+        else:
+            result = None
+
+        connection.commit()  # Commit the transaction for INSERT, UPDATE, DELETE statements
+
+        cursor.close()
+        connection.close()
+
+        return result  # Return the result set or None if no result is fetched
+    except cx_Oracle.DatabaseError as e:
+        error, = e.args
+        print(f"Oracle error - Code: {error.code}, Message: {error.message}")
+        return None
+    except Exception as e:
+        print(f"Error executing SQL query: {e}")
+        return None
+
+# Route for the index page
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+# Route for the homepage
+@app.route('/homepage')
+def homepage():
+    return render_template('homepage.html')
+
+# Route for registering a user
+@app.route('/register', methods=['POST'])
+def register():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    gender = request.form.get('gender')
+    age = request.form.get('age')
+    city = request.form.get('city')
+    mobile_no = request.form.get('mobile_no')
+
+    # Check if user with same email exists
+    query_check_user = "SELECT user_id FROM users WHERE email = :1"
+    params_check_user = (email,)
+    existing_user = execute_query(query_check_user, params_check_user)
+
+    if existing_user:
+        # If user already exists, update the existing user's information
+        user_id = existing_user[0][0]
+        query_update_user = "UPDATE users SET name = :1, gender = :2, age = :3, city = :4, mobile_no = :5 WHERE user_id = :6"
+        params_update_user = (name, gender, age, city, mobile_no, user_id)
+        execute_query(query_update_user, params_update_user)
+    else:
+        # If user doesn't exist, insert a new user
+        query_insert_user = "INSERT INTO users (name, email, gender, age, city, mobile_no) VALUES (:1, :2, :3, :4, :5, :6)"
+        params_insert_user = (name, email, gender, age, city, mobile_no)
+        execute_query(query_insert_user, params_insert_user)
+
+        # Get the ID of the last inserted user
+        query_last_user_id = "SELECT user_id FROM users WHERE email = :1"
+        last_user_id = execute_query(query_last_user_id, params_check_user)[0][0]
+
+        # Insert user data into the cart table
+        query_insert_cart = "INSERT INTO cart (user_id) VALUES (:1)"
+        params_insert_cart = (last_user_id,)
+        execute_query(query_insert_cart, params_insert_cart)
+
+    return redirect(url_for('homepage'))
+
+# Route for the header
+@app.route('/header.html')
+def header():
+    return render_template('header.html')
+
+# Route for the slider
+@app.route('/slider.html')
+def slider():
+    return render_template('slider.html')
+
+# Route for the content
+@app.route('/content.html')
+def content():
+    return render_template('content.html')
+
+# Route for the footer
+@app.route('/footer.html')
+def footer():
+    return render_template('footer.html')
+
+# Route for the order placed page
+@app.route('/orderPlaced.html')
+def orderPlaced():
+    return render_template('orderPlaced.html')
+
+# Route for the content details page
+@app.route('/contentDetails.html', methods=['GET', 'POST'])
+def contentDetails():
+    if request.method == 'POST':
+        product_id = request.args.get('id')
+
+        # Get the ID of the last inserted user
+        query_last_user_id = "SELECT user_id FROM users WHERE ROWNUM <= 1 ORDER BY user_id DESC"  # Oracle-specific query
+        user_id = execute_query(query_last_user_id)[0][0]
+
+        # Check if the product already exists in the cart for the user
+        query_check_cart = "SELECT COUNT(*) FROM cart WHERE user_id = :1 AND product_id = :2"
+        params_check_cart = (user_id, product_id)
+        cart_exists = execute_query(query_check_cart, params_check_cart)[0][0]
+
+        if cart_exists > 0:
+            # Increment add_to_cart_count if the combination exists
+            query_update_cart = "UPDATE cart SET add_to_cart_count = add_to_cart_count + 1 WHERE user_id = :1 AND product_id = :2"
+            params_update_cart = (user_id, product_id)
+            execute_query(query_update_cart, params_update_cart)
+        else:
+            # Insert user and product data into the cart table
+            query_insert_cart = "INSERT INTO cart (user_id, product_id, add_to_cart_count) VALUES (:1, :2, 1)"
+            params_insert_cart = (user_id, product_id)
+            execute_query(query_insert_cart, params_insert_cart)
+
+        return redirect(url_for('contentDetails', id=product_id))  # Redirect back to the same page after updating cart
+
+    return render_template('contentDetails.html')
+
+# Route for the cart page
+@app.route('/cart.html')
+def cart():
+    return render_template('cart.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+
+
+
+
+
+CREATE OR REPLACE TRIGGER cart_id_trigger
+BEFORE INSERT ON cart
+FOR EACH ROW
+BEGIN
+    SELECT cart_id_seq.NEXTVAL INTO :new.cart_id FROM dual;
+END;
+/
+
+
+CREATE TABLE cart (
+  cart_id NUMBER PRIMARY KEY,
+  user_id NUMBER,
+  product_id NUMBER,
+  added_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  add_to_cart_count NUMBER DEFAULT 1
+);
+
+
+CREATE SEQUENCE cart_id_seq START WITH 1 INCREMENT BY 1;
