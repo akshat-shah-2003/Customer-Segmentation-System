@@ -65,10 +65,10 @@ entry_count = 0
 kmeans = None
 
 # Function to fetch data from MySQL database
+# Function to fetch data from MySQL database
 def fetch_data_from_mysql():
     try:
-
-        #conn = mysql.connector.connect(host='localhost', user='root', password='root_user1', database='shopbase')
+        conn = mysql.connector.connect(host='localhost', user='root', password='root_user1', database='shopbase')
         cursor = conn.cursor()
 
         query = "SELECT * FROM user_cart_data"
@@ -77,9 +77,9 @@ def fetch_data_from_mysql():
         data = cursor.fetchall()
         df = pd.DataFrame(data, columns=columns)
 
-
         df['gender'] = df['gender'].astype('category')
 
+        # Close cursor and connection
         cursor.close()
         conn.close()
 
@@ -87,11 +87,10 @@ def fetch_data_from_mysql():
     except mysql.connector.Error as err:
         print("Error fetching data from MySQL:", err)
 
-
 # Function to fetch product frequencies from MySQL database
 def fetch_product_frequencies():
     try:
-        #conn = mysql.connector.connect(host='localhost', user='root', password='root_user1', database='shopbase')
+        conn = mysql.connector.connect(host='localhost', user='root', password='root_user1', database='shopbase')
         cursor = conn.cursor()
 
         frequencies = []
@@ -101,12 +100,14 @@ def fetch_product_frequencies():
             frequency = cursor.fetchone()[0]
             frequencies.append(frequency)
 
+        # Close cursor and connection
         cursor.close()
         conn.close()
 
         return frequencies
     except mysql.connector.Error as err:
         print("Error fetching product frequencies from MySQL:", err)
+
 def calculate_silhouette_score(df):
     global kmeans
     if kmeans is None:
@@ -347,4 +348,4 @@ def retrain_model():
 # Run the app
 if __name__ == '__main__':
     os.environ["OMP_NUM_THREADS"] = "1"
-    app.run_server(host='127.0.0.1', port=8082, debug=True)
+    app.run_server(host='127.0.0.1', port=8083, debug=True)
