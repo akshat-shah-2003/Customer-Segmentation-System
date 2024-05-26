@@ -28,8 +28,7 @@ The User Cart Analysis Dashboard provides real-time insights into user shopping 
 
 1. Install MySQL
 2. Install necessary libraries using:
-   '''bash
-pip install -r requirements.txt
+   ```bash pip install -r requirements.txt
 3. Go to MySQL, import shopbase scripts, run all
 4. Run app.py, and follow the link to registration page
 5. Run ploter.py and follow the link in the new tab
