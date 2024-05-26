@@ -31,8 +31,9 @@ The User Cart Analysis Dashboard provides real-time insights into user shopping 
    ```bash
    pip install -r requirements.txt
 3. Go to MySQL, import shopbase scripts, run all
-4. Run app.py, and follow the link to registration page
-5. Run ploter.py and follow the link in the new tab
-6. Go to registration page, register and make a purchase
-7. You will see the visuals to update in real time as you make a purchase
+4. Change the mysql username, password and database name according to you in app.py and ploter.py
+5. Run app.py, and follow the link to registration page
+6. Run ploter.py and follow the link in the new tab
+7. Go to registration page, register and make a purchase
+8. You will see the visuals to update in real time as you make a purchase
 
